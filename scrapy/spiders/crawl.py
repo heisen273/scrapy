@@ -12,6 +12,7 @@ import six
 
 from scrapy.exceptions import ScrapyDeprecationWarning
 from scrapy.http import Request, HtmlResponse
+from scrapy_selenium import SeleniumRequest
 from scrapy.utils.spider import iterate_spider_output
 from scrapy.utils.python import get_func_args
 from scrapy.spiders import Spider
@@ -75,7 +76,7 @@ class CrawlSpider(Spider):
         return results
 
     def _build_request(self, rule, link):
-        r = Request(url=link.url, callback=self._response_downloaded)
+        r = SeleniumRequest(url=link.url, callback=self._response_downloaded)
         r.meta.update(rule=rule, link_text=link.text)
         return r
 
