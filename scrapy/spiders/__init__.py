@@ -8,6 +8,7 @@ import warnings
 
 from scrapy import signals
 from scrapy.http import Request
+from scrapy_selenium import SeleniumRequest
 from scrapy.utils.trackref import object_ref
 from scrapy.utils.url import url_is_from_spider
 from scrapy.utils.deprecate import create_deprecated_class
@@ -80,11 +81,11 @@ class Spider(object_ref):
                 yield self.make_requests_from_url(url)
         else:
             for url in self.start_urls:
-                yield Request(url, dont_filter=True)
+                yield SeleniumRequest(url, dont_filter=True)
 
     def make_requests_from_url(self, url):
         """ This method is deprecated. """
-        return Request(url, dont_filter=True)
+        return SeleniumRequest(url, dont_filter=True)
 
     def parse(self, response):
         raise NotImplementedError('{}.parse callback is not defined'.format(self.__class__.__name__))
